@@ -1,5 +1,5 @@
-from game.playerArmor import PlayerArmor
-from game.playerWeapon import PlayerWeapon
+from game.player.playerArmor import PlayerArmor
+from game.player.playerWeapon import PlayerWeapon
 
 
 class Player:
@@ -14,3 +14,13 @@ class Player:
 
     def is_alive(self):
         return self.hp > 0
+
+    def to_dict(self):
+        return {
+            "hp": self.hp,
+            "description": self.description,
+            "name": self.name,
+            "weapon": self.weapon.to_dict(),
+            "armor": self.armor.to_dict(),
+            "death_description": self.death_description,
+        }

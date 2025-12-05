@@ -1,5 +1,5 @@
-from game.enemyArmor import EnemyArmor
-from game.enemyWeapon import EnemyWeapon
+from game.enemy.enemyArmor import EnemyArmor
+from game.enemy.enemyWeapon import EnemyWeapon
 
 
 class Enemy:
@@ -14,3 +14,13 @@ class Enemy:
 
     def is_alive(self):
         return self.hp > 0
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "hp": self.hp,
+            "description": self.description,
+            "death_description": self.death_description,
+            "weapon": self.weapon.to_dict(),
+            "armor": self.armor.to_dict()
+        }
