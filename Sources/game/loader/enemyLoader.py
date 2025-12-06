@@ -9,7 +9,7 @@ from game.enemy.enemyWeapon import EnemyWeapon
 path = Path(__file__).parent.parent / "json" / "data.json"
 
 
-def loadEnemy(path: str):
+def load_enemy(path: str):
     with open(path, "r", encoding="UTF-8") as file:
         data = json.load(file)
 

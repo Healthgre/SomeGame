@@ -9,7 +9,7 @@ class Enemy:
         self.hp = hp
         self.description = description
         self.death_description = death_description
-        self.weapon = weapon or EnemyWeapon("Без оружия", "Нет описания", 0, 0)
+        self.weapon = weapon or EnemyWeapon("Без оружия", 0, "Нет описания", 0)
         self.armor = armor or EnemyArmor("Без брони", "Нет описания", 0)
 
     def is_alive(self):
@@ -24,3 +24,12 @@ class Enemy:
             "weapon": self.weapon.to_dict(),
             "armor": self.armor.to_dict()
         }
+
+    def __repr__(self):
+        return (f"Enemy("
+                f"\nname = {self.name},"
+                f"\nhp = {self.hp},"
+                f"\ndescription = {self.description},"
+                f"\ndeath_description = {self.death_description},"
+                f"\nweapon = {self.weapon},"
+                f"\narmor = {self.armor})")

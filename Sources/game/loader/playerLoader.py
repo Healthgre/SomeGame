@@ -9,7 +9,7 @@ from game.player.playerWeapon import PlayerWeapon
 path = Path(__file__).parent.parent / "json" / "data.json"
 
 
-def loadPlayer(path: str):
+def load_player(path: str):
     randPlayer = random.randint(0, 2)
     randDeath = random.randint(0, 1)
 

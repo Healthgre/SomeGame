@@ -24,3 +24,12 @@ class Player:
             "armor": self.armor.to_dict(),
             "death_description": self.death_description,
         }
+
+    def __repr__(self):
+        return (f"Player("
+                f"\nhp = {self.hp},"
+                f"\ndescription = {self.description},"
+                f"\nname = {self.name},"
+                f"\nweapon = {self.weapon},"
+                f"\narmor = {self.armor},"
+                f"\ndeath_description = {self.death_description})")
