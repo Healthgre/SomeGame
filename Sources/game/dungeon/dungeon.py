@@ -7,7 +7,6 @@ class Dungeon:
         self.position = 0
 
     def current_room(self):
-
         return self.rooms[self.position]
 
     def move_forward(self):
@@ -38,5 +37,3 @@ class Dungeon:
             f"\nrooms = {self.rooms}"
             "\n)"
         )
-
-

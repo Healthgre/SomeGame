@@ -12,8 +12,14 @@ class Player:
         self.armor = armor
         self.death_description = death_description
 
-    def is_alive(self):
-        return self.hp > 0
+    def __repr__(self):
+        return (f"Player("
+                f"\nhp = {self.hp},"
+                f"\ndescription = {self.description},"
+                f"\nname = {self.name},"
+                f"\nweapon = {self.weapon},"
+                f"\narmor = {self.armor},"
+                f"\ndeath_description = {self.death_description})")
 
     def to_dict(self):
         return {
@@ -25,11 +31,11 @@ class Player:
             "death_description": self.death_description,
         }
 
-    def __repr__(self):
-        return (f"Player("
-                f"\nhp = {self.hp},"
-                f"\ndescription = {self.description},"
-                f"\nname = {self.name},"
-                f"\nweapon = {self.weapon},"
-                f"\narmor = {self.armor},"
-                f"\ndeath_description = {self.death_description})")
+    def is_alive(self):
+        return self.hp > 0
+
+    def take_damage(self, damage: int):
+        armor = self.armor.defense
+        final_damage = max(0, damage - armor)
+        self.hp = max(0, self.hp - final_damage)
+        return final_damage

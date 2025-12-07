@@ -33,12 +33,10 @@ def load_dungeon(path: str):
 
             )
             if i in {1, 3, 5}:
-                room.spawn_enemy(enemies)
+                enemy = enemies.pop(0)
+                room.spawn_enemy(enemy)
 
             rooms.append(room)
 
         dungeon = Dungeon(rooms)
         return dungeon
-
-
-print(load_dungeon(path))

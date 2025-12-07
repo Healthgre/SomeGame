@@ -32,6 +32,6 @@ class Room:
     def has_enemy(self):
         return bool(self.enemy and self.enemy.is_alive())
 
-    def spawn_enemy(self, enemies):
+    def spawn_enemy(self, enemy):
         if not self.is_start_room and not self.is_exit_room:
-            self.enemy = random.choice(enemies)
+            self.enemy = enemy
