@@ -11,33 +11,36 @@ def test_load_enemy(json_path, tmp_path):
     with open(json_path, "r", encoding="utf-8") as file:
         data = json.load(file)
 
-        # временный json
-        temp_json = tmp_path / "enemy.json"
-        # работает - НЕ СЛОМАЙ!!!
-        temp_json.write_text(json.dumps(data, ensure_ascii=False), encoding="UTF-8")
+    # временный json
+    temp_json = tmp_path / "enemy.json"
+    # работает - НЕ СЛОМАЙ!!!
+    temp_json.write_text(json.dumps(data, ensure_ascii=False), encoding="UTF-8")
 
-        # мокнул рандомный выбор врага - надо читануть подучить.
-        with patch("random.randint", return_value=0):
-            enemy = load_enemy(str(temp_json))
+    # мокнул рандомный выбор врага - надо читануть подучить.
+    with patch("random.choice", return_value=data["enemy"][0]):
+        enemy = load_enemy(str(temp_json))
 
-        # проверяем оружие
-        weapon_data = data["enemy"]["weapon"]
-        assert isinstance(enemy.weapon, EnemyWeapon)
-        assert enemy.weapon.name == weapon_data["name"]
-        assert enemy.weapon.description == weapon_data["description"]
-        assert enemy.weapon.damage == weapon_data["damage"]
-        assert enemy.weapon.hit_chance == weapon_data["hit_chance"]
+    # === Получаем ожидаемые данные ===
+    expected = data["enemy"][0]
+    expected_weapon = expected["weapon"]
+    expected_armor = expected["armor"]
 
-        # проверяем броню
-        armor_data = data["enemy"]["armor"]
-        assert isinstance(enemy.armor, EnemyArmor)
-        assert enemy.armor.name == armor_data["name"]
-        assert enemy.armor.description == armor_data["description"]
-        assert enemy.armor.defense == armor_data["defense"]
+    # Проверка оружие
+    assert isinstance(enemy.weapon, EnemyWeapon)
+    assert enemy.weapon.name == expected_weapon["name"]
+    assert enemy.weapon.description == expected_weapon["description"]
+    assert enemy.weapon.damage == expected_weapon["damage"]
+    assert enemy.weapon.hit_chance == expected_weapon["hit_chance"]
 
-        # проверяем самого врага
-        assert isinstance(enemy, Enemy)
-        assert enemy.hp == data["enemy"]["hp"]
-        assert enemy.name == data["enemy"]["name"][0]
-        assert enemy.description == data["enemy"]["description"][0]
-        assert enemy.death_description == data["enemy"]["death_description"][0]
+    # Проверка броню
+    assert isinstance(enemy.armor, EnemyArmor)
+    assert enemy.armor.name == expected_armor["name"]
+    assert enemy.armor.description == expected_armor["description"]
+    assert enemy.armor.defense == expected_armor["defense"]
+
+    # Проверка врага
+    assert isinstance(enemy, Enemy)
+    assert enemy.name == expected["name"]
+    assert enemy.hp == expected["hp"]
+    assert enemy.description == expected["description"]
+    assert enemy.death_description == expected["death_description"]

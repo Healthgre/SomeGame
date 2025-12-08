@@ -1,5 +1,3 @@
-import random
-
 from game.enemy.enemy import Enemy
 
 

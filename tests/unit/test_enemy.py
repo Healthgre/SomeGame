@@ -1,3 +1,7 @@
+import pytest
+
+
+@pytest.mark.enemy
 def test_enemy_is_alive(enemy_fixture):
     assert enemy_fixture.is_alive() is True
 
@@ -8,7 +12,7 @@ def test_enemy_is_alive(enemy_fixture):
     enemy_fixture.take_damage(100)
     assert enemy_fixture.is_alive() is False
 
-
+@pytest.mark.enemy
 def test_enemy_take_damage(enemy_fixture):
     # броня = 3, урон = 10 - 3 проходится 7
     damage = enemy_fixture.take_damage(10)

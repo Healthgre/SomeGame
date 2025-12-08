@@ -1,6 +1,8 @@
+import pytest
+
 from game.enemy.enemyWeapon import EnemyWeapon
 
-
+@pytest.mark.enemy_weapon
 def test_enemy_weapon_to_dict():
     weapon = EnemyWeapon("test_name", "test_description", 4, 80)
     data = weapon.to_dict()

@@ -1,3 +1,7 @@
+import pytest
+
+
+@pytest.mark.player
 def test_player_is_alive(player_fixture):
     assert player_fixture.is_alive() is True
 
@@ -9,6 +13,7 @@ def test_player_is_alive(player_fixture):
     assert player_fixture.is_alive() is False
 
 
+@pytest.mark.player
 def test_player_take_damage(player_fixture):
     # броня = 3, урон = 10, 10 - 3 = приходится 7
 
